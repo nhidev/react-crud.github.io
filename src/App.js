@@ -11,7 +11,6 @@ class App extends Component {
       tasks: [], //id, name, status
       isDisplayForm: false
     }
-    this.onGenerateData = this.onGenerateData.bind(this)
   }
   componentWillMount(){
     if(localStorage && localStorage.getItem('tasks')){
@@ -21,30 +20,7 @@ class App extends Component {
       })
     }
   }
-//  onGenerateData = () => {}
-  onGenerateData(){
-    var tasks = [
-      {
-        id: this.generteId() ,
-        name: 'Hoc React',
-        status: true
-      },
-      {
-       id: this.generteId(),
-        name: 'Hoc Redux',
-        status: false
-      },
-      {
-       id: this.generteId(),
-        name: 'Hoc React-Redux',
-        status: true
-      }
-    ]
-    this.setState({
-      tasks: tasks
-    });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
+ 
   s4(){
     return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
   }
@@ -64,9 +40,18 @@ class App extends Component {
     })
   }
 
+  onSubmit = (data) => {
+   var {tasks} = this.state;
+   data.id = this.generteId();
+   tasks.push(data);
+   this.setState({
+    tasks: tasks
+   });
+   localStorage.setItem('tasks', JSON.stringify(tasks))
+  }
   render() {
     var {tasks, isDisplayForm} = this.state // var tasks = this.state.tasks
-    var elmDisplay = isDisplayForm? <TaskForm onCloseForm={this.onCloseForm} /> : ''
+    var elmDisplay = isDisplayForm? <TaskForm onSubmit={this.onSubmit} onCloseForm={this.onCloseForm} /> : ''
     return (
       <div className="container">
         <div className="text-center">
@@ -82,7 +67,6 @@ class App extends Component {
                 <button type="button" 
                         className="btn btn-primary"
                         onClick={this.onToggleForm}><span className="fa fa-plus mr-5"></span>Thêm Công Việc</button>
-                 <button type="button" className="btn btn-danger" onClick = {this.onGenerateData} >Generate Data</button>
                
                 {/* Search - Sort */}
                   <Control />
