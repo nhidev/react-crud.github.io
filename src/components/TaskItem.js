@@ -4,9 +4,14 @@ class TaskItem extends Component {
   onUpdateStatus = () => {
       this.props.onUpdateStatus(this.props.task.id);
   }
+
   onDelete = () => {
       this.props.onDelete(this.props.task.id);
   }
+   onUpdate = () => {
+    this.props.onUpdate(this.props.task.id)
+   }
+
 
   render() {
     var {task, index} = this.props //var task = this.props.task
@@ -20,7 +25,12 @@ class TaskItem extends Component {
               >{task.status === true? 'Kích hoạt' : 'Ẩn'}</span>
             </td>
            <td className="text-center button-group">
-                <button type="button" className="btn btn-warning"><span className="fa fa-pencil mr-5"></span>Sửa</button>
+                <button type="button"
+                        className="btn btn-warning"
+                        onClick = {this.onUpdate}
+                >
+                  <span className="fa fa-pencil mr-5"></span>Sửa
+                </button>
                <button type="button" 
                         className="btn btn-danger"
                         onClick = {this.onDelete}
