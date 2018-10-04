@@ -131,8 +131,15 @@ class App extends Component {
       }
     })
   }
+
+  onSearch = (keyword) => {
+    this.setState({
+      keyword: keyword
+    })
+  }
+
   render() {
-    var {tasks, isDisplayForm, taskEditing, filter} = this.state // var tasks = this.state.tasks
+    var {tasks, isDisplayForm, taskEditing, filter, keyword} = this.state // var tasks = this.state.tasks
     if(filter) {
       if(filter.name){
         tasks = tasks.filter((task) => {
@@ -145,6 +152,11 @@ class App extends Component {
         }else {
           return task.status === (filter.status === 1? true : false)
         }
+      })
+    }
+    if(keyword){
+     tasks = tasks.filter((task) => {
+          return task.name.toLowerCase().indexOf(keyword) !== -1;
       })
     }
     var elmDisplay = isDisplayForm? 
@@ -170,7 +182,7 @@ class App extends Component {
                         onClick={this.onToggleForm}><span className="fa fa-plus mr-5"></span>Thêm Công Việc</button>
                
                 {/* Search - Sort */}
-                  <Control />
+                  <Control onSearch = {this.onSearch} />
                 <div className="row mt-15">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         {/* TaskList*/}
