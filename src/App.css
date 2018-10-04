@@ -24,6 +24,12 @@
 .mt-15 {
   margin-top: 15px;
 }
+.btn .fa {
+  margin-right: 5px;
+}
+.button-group button:first-child {
+  margin-right: 5px;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
