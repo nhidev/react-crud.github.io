@@ -19,26 +19,26 @@ class App extends Component {
         tasks: tasks
       })
     }
-  };
+  }
  
   s4(){
     return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
   };
   generteId(){
     return this.s4() + '-' + this.s4();
-  };
+  }
 
   onToggleForm = () => {
     this.setState({
       isDisplayForm : !this.state.isDisplayForm
     })
-  };
+  }
 
   onCloseForm = () => {
     this.setState({
       isDisplayForm: false
     })
-  };
+  }
 
   onSubmit = (data) => {
    var {tasks} = this.state;
@@ -48,7 +48,7 @@ class App extends Component {
     tasks: tasks
    });
    localStorage.setItem('tasks', JSON.stringify(tasks))
-  };
+  }
 
   onUpdateStatus = (id) => {
     var {tasks} = this.state;
@@ -60,7 +60,7 @@ class App extends Component {
       });
       localStorage.setItem('tasks', JSON.stringify(tasks))
     }
-  };
+  }
 
   findIndex = (id) => {
     var {tasks} = this.state;
@@ -71,7 +71,20 @@ class App extends Component {
       }
     })
     return result;
-  };
+  }
+
+  onDelete = (id) => {
+    var {tasks} = this.state;
+    var index = this.findIndex(id);
+    if(index !== -1){
+     tasks.splice(index, 1);
+      this.setState({
+        tasks : tasks
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks))
+    }
+    this.onCloseForm();
+  }
 
   render() {
     var {tasks, isDisplayForm} = this.state // var tasks = this.state.tasks
@@ -97,7 +110,7 @@ class App extends Component {
                 <div className="row mt-15">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         {/* TaskList*/}
-                        <TaskList tasks= {tasks} onUpdateStatus={this.onUpdateStatus} />
+                        <TaskList tasks= {tasks} onUpdateStatus={this.onUpdateStatus} onDelete={this.onDelete} />
                     </div>
                 </div>
             </div>
