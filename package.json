@@ -2,7 +2,7 @@
   "name": "creat-crud",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://lerning-react.github.io/react-crud",
+  "homepage": "https://lerning-react.github.io/react-crud",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.5.2",
