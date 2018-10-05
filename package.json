@@ -2,6 +2,7 @@
   "name": "creat-crud",
   "version": "0.1.0",
   "private": true,
+  "https://nhidev.github.io/react-crud"
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
